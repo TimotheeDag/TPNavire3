@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TPNavire3
+namespace NavireHeritage.classesMetier
 {
-    internal class Program
+    internal class Croisière
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }
