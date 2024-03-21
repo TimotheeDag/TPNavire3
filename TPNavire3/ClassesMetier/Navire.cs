@@ -10,101 +10,45 @@ namespace NavireHeritage.classesMetier
 {
     internal class Navire
     {
-        private string imo;
-        private string nom;
-        private string libelleFret;
-        private int qteFretMaxi;
-        private int qteFret;
-        private int tonnageDT;
-        private int tonnageDWT;
+        private readonly string imo;
+        private readonly string nom;
+        private string latitude;
+        private string longitute;
+        private readonly int tonnageGT;
+        private readonly int tonnageDWT;
         private int tonnageActuel;
 
-        public Navire(string imo, string nom, string libelleFret, int qteFretMaxi, int qteFret, int tonnageDT, int tonnageDWT, int tonnageActuel)
+        public Navire(string imo, string nom, string latitude, string longitude, int tonnageDWT, int tonnageActuel, int tonnageGT)
         {
-            this.Imo = imo;
-            this.Nom = nom;
-            this.LibelleFret = libelleFret;
-            this.QteFretMaxi = qteFretMaxi;
-            this.QteFret = qteFret;
+            this.imo = imo;
+            this.nom = nom;
+            this.Latitude = latitude;
+            this.Longitute = longitude;
+            this.tonnageDWT = tonnageDWT;
             this.TonnageActuel = tonnageActuel;
-            this.TonnageDT = tonnageDT;
-            this.TonnageDWT = tonnageDWT;
+            this.tonnageGT = tonnageGT;
+
         }
 
-        public Navire(string imo, string nom) : this(imo, nom, "Indéfini", 0, 0) { }
-
-        public string Imo
-        {
-            get => imo;
-            set
-            {
-                if (Regex.IsMatch(value, @"^IMO[1-9]\d{6}$"))
-                {
-                    this.imo = value;
-                }
-                else
-                {
-                    throw new Exception("Erreur, format de l'imo invalide");
-                }
-            }
-        }
-        public string Nom { get => nom; set => nom = value; }
-        public string LibelleFret { get => libelleFret; set => libelleFret = value; }
-        public int QteFretMaxi
-        {
-            get => qteFretMaxi;
-            set
-            {
-                if (value >= 0)
-                {
-                    this.qteFretMaxi = value;
-                }
-                else
-                {
-                    throw new Exception("Erreur, quantité de fret non valide");
-                }
-            }
-        }
-        public int QteFret
-        {
-            get => qteFret;
-            set
-            {
-                if (value >= 0 && value <= qteFretMaxi)
-                {
-                    this.qteFret = value;
-                }
-                else
-                {
-                    throw new GestionPortException("Valeur incohérente pour la quantité de fret stockée dans le navire");
-                }
-            }
-        }
-
-        public int TonnageDT { get => tonnageDT; set => tonnageDT = value; }
-        public int TonnageDWT { get => tonnageDWT; set => tonnageDWT = value; }
+        public string Imo{ get => imo; }
+        public string Nom { get => nom; }
+        public int TonnageGT { get => tonnageGT; }
+        public int TonnageDWT { get => tonnageDWT; }
         public int TonnageActuel { get => tonnageActuel; set => tonnageActuel = value; }
+        public string Longitute { get => longitute; set => longitute = value; }
+        public string Latitude { get => latitude; set => latitude = value; }
 
         public string Affiche(Navire navire)
         {
             return ($" Identification : {navire.imo.ToString()}\n" +
                 $" Nom : {navire.nom.ToString()}\n" +
-                $" Type de frêt : {navire.libelleFret.ToString()}\n" +
-                $" Qte de frêt : {navire.qteFretMaxi.ToString()}\n" +
+                $" tonnageDT : {navire.tonnageGT.ToString()}\n" +
+                $" TonnageActuel : {navire.tonnageActuel.ToString()}\n" +
+                $" tonnageDWT : {navire.tonnageDWT.ToString()}\n" +
+                $" latitude : {navire.latitude.ToString()}\n" +
+                $" longitute : {navire.longitute.ToString()}\n" +
                 $"----------------------------------");
         }
 
-        public void Decharger(int quantite)
-        {
-            if (quantite < 0) throw new GestionPortException("La quantité à décharger ne peut être négative ou nulle");
-            else if (quantite > QteFret) throw new GestionPortException("Impossible de décharger plus que la quantité de fret dans le navire");
-
-            QteFret -= quantite;
-        }
-
-        public bool EstDecharge()
-        {
-            return QteFret == 0;
-        }
     }
 }

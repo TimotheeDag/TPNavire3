@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassesMetier\Cargo.cs" />
-    <Compile Include="ClassesMetier\Croisière.cs" />
+    <Compile Include="ClassesMetier\-Croisière.cs" />
     <Compile Include="ClassesMetier\Navire.cs" />
     <Compile Include="ClassesMetier\Passager.cs" />
     <Compile Include="ClassesMetier\Port.cs" />

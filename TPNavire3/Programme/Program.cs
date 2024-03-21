@@ -24,19 +24,19 @@ namespace NavireHeritage
                 Console.WriteLine(port);
                 //Test.AfficheAttendus(port);
 
-                //Test.TestEnregistrerArriveePrevue(port, new Cargo("IMO9780859", "CMA CGM A. LINCOLN", "43.43279 N", "134.76258 W",
-                //140872, 148992, 123000, "marchandises diverses"));
-                ///*		 
-                // * enregistrement de l'arrivée d'un Navire de la classe Croisiere
-                // * Il y a toujours de la place.
-                // */
-                //Test.TestEnregistrerArrivee(port, "IMO9241061");
+                Test.TestEnregistrerArriveePrevue(port, new Cargo("IMO9780859", "CMA CGM A. LINCOLN", "43.43279 N", "134.76258 W", "marchandises diverses",
+                140872, 148992, 123000 ));
+                /*		 
+                 * enregistrement de l'arrivée d'un Navire de la classe Croisiere
+                 * Il y a toujours de la place.
+                 */
+                Test.TestEnregistrerArrivee(port, "IMO9241061");
 
-                ///*
-                // *  Dans ce test, on essaie d'enregistrer l'arrivée d'un navire
-                // *  qui n'est pas attendu dans le port 
-                // *  */
-                //Test.TestEnregistrerArrivee(port, "IMO0000000");
+                /*
+                 *  Dans ce test, on essaie d'enregistrer l'arrivée d'un navire
+                 *  qui n'est pas attendu dans le port 
+                 *  */
+                Test.TestEnregistrerArrivee(port, "IMO0000000");
 
                 ///**
                 // * Dans ce test, on essaie d'enregistrer l'arrivée d'un navire 
@@ -111,8 +111,6 @@ namespace NavireHeritage
                 //* Le cargo en attente devrait passer dans les navires arrivés
                 //*/
                 //Test.testEnregistrerDepart(port, "IMO9755933");
-
-                Console.WriteLine(port);
 
             }
             catch (Exception ex)

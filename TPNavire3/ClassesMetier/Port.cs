@@ -48,12 +48,12 @@ namespace NavireHeritage.ClassesMetier
         public int NbQuaisPassager { get => nbQuaisPassager; set => nbQuaisPassager = value; }
         internal Dictionary<string, Navire> NavireAttendus { get => navireAttendus; set => navireAttendus = value; }
         internal Dictionary<string, Navire> NavireArrives { get => navireArrives; set => navireArrives = value; }
-        internal Dictionary<string, Navire> NavireenAttente { get => navireenAttente; set => navireenAttente = value; }
+        internal Dictionary<string, Navire> NavireEnAttente { get => navireenAttente; set => navireenAttente = value; }
         internal Dictionary<string, Navire> NavirePartis { get => navirePartis; set => navirePartis = value; }
 
         public override string ToString()
         {
-            return "port de" + this.nom + "\n\tCoordonnées GPS:" + this.latitude + " / " + this.longitude +
+            return "port de " + this.nom + "\n\tCoordonnées GPS:" + this.latitude + " / " + this.longitude +
                 "\n\tNb portiques: " + this.nbPortique +
                 "\n\tNb quais croisière: " + this.nbQuaisPassager +
                 "\n\tnb quais tankers: " + this.nbQuaisTanker +
@@ -61,16 +61,20 @@ namespace NavireHeritage.ClassesMetier
                 "\n\tnb Navire à quais: " + navireArrives.Count +
                 "\n\tNb Navires attendus: " + navireAttendus.Count +
                 "\n\tNb Navires à partis: " + navireAttendus.Count +
-                "\n\tNb Navires en attente: " + navireAttendus.Count; 
+                "\n\tNb Navires en attente: " + navireAttendus.Count +
+                "\n\n\tNb cargos dans le port: " + GetCargo() +
+                "\n\tNb tanker dans le port: " + GetNbTanker() +
+                "\n\tNb super tanker dans le port: " + GetSuperTanker() ;
+
 
         }
 
-        public int GetCargo(Navire navire)
+        public int GetCargo()
         {
             int i= 0;
             foreach (Navire nav in navireArrives.Values)
             {
-                if (navire is Cargo)
+                if (nav is Cargo)
                 {
                     i++;
                 }
@@ -78,12 +82,12 @@ namespace NavireHeritage.ClassesMetier
             return i;
         }
 
-        public int GetNbTanker(Navire navire)
+        public int GetNbTanker()
         {
             int i = 0;
-            foreach (Navire navire in navireArrives.Values)
+            foreach (Navire nav in navireArrives.Values)
             {
-                if (navire is Tanker)
+                if (nav is Tanker)
                 {
                     i++;
                 }
@@ -91,12 +95,12 @@ namespace NavireHeritage.ClassesMetier
             return i;
         }
 
-        public int GetSuperTanker(Navire navire)
+        public int GetSuperTanker()
         {
             int i = 0;
-            foreach (Navire navire in navireArrives.Values)
+            foreach (Navire nav in navireArrives.Values)
             {
-                if (navire is superTanker)
+                if (nav.TonnageActuel > 130000 && nav is Tanker )
                 {
                     i++;
                 }
@@ -106,7 +110,12 @@ namespace NavireHeritage.ClassesMetier
 
         public void EnregistrerArriveePrevue(Navire navire)
         {
+            navireAttendus.Add(navire.Imo, navire);
+        }
 
+        public void EnregistrerArrivee(Navire navire)
+        {
+            navireArrives.Add(navire.Imo, navire);
         }
     }
 
