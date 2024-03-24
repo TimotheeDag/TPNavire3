@@ -59,12 +59,25 @@ namespace NavireHeritage.ClassesTechniques
             }
         }
 
-        public static void TestEnregistrerArrivee(Port port, String imo)
+        public static void TestEnregistrerArrivee(Port port, Navire navire)
         {
             try
             {
-                port.EnregistrerArrivee(imo);
-                Console.WriteLine("navire" + imo + "arrivé");
+                port.EnregistrerArrivee(navire);
+                Console.WriteLine("le navire " + navire.Imo + " est arrivé");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public static void TestEnregistrerDepart(Port port, Navire navire)
+        {
+            try
+            {
+                port.EnregistrerDepart(navire);
+                Console.WriteLine("le navire " + navire.Imo + " est parti");
             }
             catch (Exception ex)
             {

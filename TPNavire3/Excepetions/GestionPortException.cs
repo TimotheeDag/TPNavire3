@@ -9,8 +9,8 @@ namespace GestionNavire.Exceptions
     internal class GestionPortException : Exception
     {
         public GestionPortException(string message)
-               : base("Erreur de : " + System.Environment.UserName + " le " + DateTime.Now.ToLocalTime() +
-                    "\n" + message)
+               : base("\nErreur de : " + System.Environment.UserName + " le " + DateTime.Now.ToLocalTime() + ":" +
+                    "\n" + message + "\n")
         { }
     }
 }
